@@ -4,18 +4,27 @@
 #
 Name     : perl-File-Path-Expand
 Version  : 1.02
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/File-Path-Expand-1.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/File-Path-Expand-1.02.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-path-expand-perl/libfile-path-expand-perl_1.02-3.debian.tar.xz
 Summary  : expand filenames
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-File-Path-Expand-license
-Requires: perl-File-Path-Expand-man
+Requires: perl-File-Path-Expand-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 No detailed description available
+
+%package dev
+Summary: dev components for the perl-File-Path-Expand package.
+Group: Development
+Provides: perl-File-Path-Expand-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-File-Path-Expand package.
+
 
 %package license
 Summary: license components for the perl-File-Path-Expand package.
@@ -25,19 +34,11 @@ Group: Default
 license components for the perl-File-Path-Expand package.
 
 
-%package man
-Summary: man components for the perl-File-Path-Expand package.
-Group: Default
-
-%description man
-man components for the perl-File-Path-Expand package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n File-Path-Expand-1.02
-mkdir -p %{_topdir}/BUILD/File-Path-Expand-1.02/deblicense/
+cd ..
+%setup -q -T -D -n File-Path-Expand-1.02 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Path-Expand-1.02/deblicense/
 
 %build
@@ -62,12 +63,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-File-Path-Expand
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-File-Path-Expand/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-Path-Expand
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Path-Expand/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -76,12 +77,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/File/Path/Expand.pm
+/usr/lib/perl5/vendor_perl/5.26.1/File/Path/Expand.pm
 
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-File-Path-Expand/deblicense_copyright
-
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/File::Path::Expand.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-File-Path-Expand/deblicense_copyright
