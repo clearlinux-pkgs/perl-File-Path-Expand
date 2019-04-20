@@ -4,11 +4,11 @@
 #
 Name     : perl-File-Path-Expand
 Version  : 1.02
-Release  : 9
+Release  : 10
 URL      : https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/File-Path-Expand-1.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/File-Path-Expand-1.02.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-path-expand-perl/libfile-path-expand-perl_1.02-3.debian.tar.xz
-Summary  : expand filenames
+Summary  : Perl/CPAN Module File::Path::Expand
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-File-Path-Expand-license = %{version}-%{release}
@@ -21,6 +21,7 @@ No detailed description available
 Summary: dev components for the perl-File-Path-Expand package.
 Group: Development
 Provides: perl-File-Path-Expand-devel = %{version}-%{release}
+Requires: perl-File-Path-Expand = %{version}-%{release}
 
 %description dev
 dev components for the perl-File-Path-Expand package.
@@ -39,7 +40,7 @@ license components for the perl-File-Path-Expand package.
 cd ..
 %setup -q -T -D -n File-Path-Expand-1.02 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Path-Expand-1.02/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Path-Expand-1.02/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
