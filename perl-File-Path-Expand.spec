@@ -4,7 +4,7 @@
 #
 Name     : perl-File-Path-Expand
 Version  : 1.02
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/File-Path-Expand-1.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/File-Path-Expand-1.02.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-path-expand-perl/libfile-path-expand-perl_1.02-3.debian.tar.xz
@@ -76,7 +76,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-Path-Expand
-cp %{_builddir}/File-Path-Expand-1.02/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Path-Expand/9b836dbc45d920226a9e2f5cef9cff1e6161f761
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-File-Path-Expand/9b836dbc45d920226a9e2f5cef9cff1e6161f761
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -100,4 +100,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/File/Path/Expand.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/Path/Expand.pm
