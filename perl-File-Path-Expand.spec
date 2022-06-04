@@ -4,7 +4,7 @@
 #
 Name     : perl-File-Path-Expand
 Version  : 1.02
-Release  : 22
+Release  : 23
 URL      : https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/File-Path-Expand-1.02.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/File-Path-Expand-1.02.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-path-expand-perl/libfile-path-expand-perl_1.02-3.debian.tar.xz
@@ -100,4 +100,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/File/Path/Expand.pm
+/usr/lib/perl5/*
